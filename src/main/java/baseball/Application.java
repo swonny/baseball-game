@@ -20,7 +20,7 @@ public class Application {
 }
 
 class Game {
-    List<Integer> answers = new ArrayList<Integer>(3);
+    private List<Integer> answers = new ArrayList<Integer>(3);
 
     public void startGame() {
         System.out.println("Game has started!");
