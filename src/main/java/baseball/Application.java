@@ -25,13 +25,11 @@ class Game {
         answers = answer.createRandomNumbers();
         System.out.println(answers);
         boolean correct = true;
-
         do {
             String userAnswers = new String();
             System.out.print("숫자를 입력해주세요 : ");
             userAnswers = Console.readLine(); // 숫자 입력
             correct = answer.getHint(answers, userAnswers);
-
         } while (!correct);
     }
 }
@@ -42,7 +40,6 @@ class Answer {
         for (int i = 0; i < 3; i++) {
             answers += Integer.toString(Randoms.pickNumberInRange(1, 9));
         }
-
         return answers;
     }
 
@@ -50,7 +47,6 @@ class Answer {
         int strike = countStrike(answers, userAnswers);
         int ball = countBall(answers, userAnswers);
         ball -= strike;
-
         String output = new String();
         if (ball > 0) {
             output += Integer.toString(ball) + "볼 ";
@@ -76,7 +72,6 @@ class Answer {
                 count += 1;
             }
         }
-
         return count;
     }
 
@@ -87,7 +82,6 @@ class Answer {
                 count += 1;
             }
         }
-
         return count;
     }
 }
