@@ -1,8 +1,11 @@
 package baseball;
 
+import  camp.nextstep.edu.missionutils.Randoms;
+import  camp.nextstep.edu.missionutils.Console;
 public class Application {
     public static void main(String[] args) {
-        System.out.println("Test");
         //TODO: 숫자 야구 게임 구현
+        String tmp = (String)Console.readLine();
+        System.out.println(tmp);
     }
 }
