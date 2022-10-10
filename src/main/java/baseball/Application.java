@@ -20,18 +20,36 @@ public class Application {
 }
 
 class Game {
-    private List<Integer> answers = new ArrayList<Integer>(3);
+//    private List<Integer> answers = new ArrayList<Integer>(3); // String으로 변경하기
+    String answers = new String();
 
     public void startGame() {
-        System.out.println("Game has started!");
-        createRandomNumbers();
-        System.out.println(answers);
-    }
+        Answer answer = new Answer();
+        answers = answer.createRandomNumbers();
+        boolean repeat = true;
 
-    private void createRandomNumbers() {
-        for (int i = 0; i < 3; i++) {
-            answers.add(Randoms.pickNumberInRange(1, 9));
-        }
+        do {
+            String userAnswers = new String();
+            System.out.print("숫자를 입력해주세요 : ");
+            userAnswers = Console.readLine();
+            System.out.println(answers);
+
+            if (answers.equals(userAnswers)) {
+                repeat = false;
+            }
+
+        } while (repeat);
     }
 }
 
+class Answer {
+    public String createRandomNumbers() {
+        String answers = new String();
+
+        for (int i = 0; i < 3; i++) {
+            answers += Integer.toString(Randoms.pickNumberInRange(1, 9));
+        }
+
+        return answers;
+    }
+}
