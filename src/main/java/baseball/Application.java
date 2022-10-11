@@ -18,34 +18,32 @@ public class Application {
 }
 
 class Game {
-    String answers = new String();
-
     public void startGame() {
-        Answer answer = new Answer();
-        answers = answer.createRandomNumbers();
-        System.out.println(answers);
+        Answer answer = new Answer(); // 난수 생성
+
         boolean correct = true;
         do {
             String userAnswers = new String();
             System.out.print("숫자를 입력해주세요 : ");
             userAnswers = Console.readLine(); // 숫자 입력
-            correct = answer.getHint(answers, userAnswers);
+            correct = answer.getHint(userAnswers);
         } while (!correct);
     }
 }
 
 class Answer {
-    public String createRandomNumbers() {
-        String answers = new String();
+    private String answers = new String();
+
+    Answer() {
         for (int i = 0; i < 3; i++) {
             answers += Integer.toString(Randoms.pickNumberInRange(1, 9));
         }
-        return answers;
+        System.out.println(answers);
     }
 
-    public boolean getHint(String answers, String userAnswers) {
-        int strike = countStrike(answers, userAnswers);
-        int ball = countBall(answers, userAnswers);
+    public boolean getHint(String userAnswers) {
+        int strike = countStrike(userAnswers);
+        int ball = countBall(userAnswers);
         ball -= strike;
         String output = new String();
         if (ball > 0) {
@@ -65,7 +63,7 @@ class Answer {
         return false;
     }
 
-    private int countBall(String answers, String userAnswers) {
+    private int countBall(String userAnswers) {
         int count = 0;
         for (int i = 0; i < 3; i++) {
             if (userAnswers.indexOf(answers.charAt(i)) > -1) {
@@ -75,7 +73,7 @@ class Answer {
         return count;
     }
 
-    private int countStrike(String answers, String userAnswers) {
+    private int countStrike(String userAnswers) {
         int count = 0;
         for (int i = 0; i < 3; i++) {
             if (answers.charAt(i) == userAnswers.charAt(i)) {
