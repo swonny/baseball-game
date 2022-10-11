@@ -18,15 +18,18 @@ public class Application {
 }
 
 class Game {
+    private Answer answer;
+    private UserInput userInput;
+
     public void startGame() {
-        Answer answer = new Answer(); // 난수 생성
+        answer = new Answer(); // 난수 생성
 
         boolean correct = true;
         do {
             String userAnswers = new String();
             System.out.print("숫자를 입력해주세요 : ");
-            userAnswers = Console.readLine(); // 숫자 입력
-            correct = answer.getHint(userAnswers);
+            userInput = new UserInput(); // 사용자 숫자 입력
+            correct = answer.getHint(userInput.userAnswers);
         } while (!correct);
     }
 }
@@ -38,7 +41,6 @@ class Answer {
         for (int i = 0; i < 3; i++) {
             answers += Integer.toString(Randoms.pickNumberInRange(1, 9));
         }
-        System.out.println(answers);
     }
 
     public boolean getHint(String userAnswers) {
@@ -81,5 +83,27 @@ class Answer {
             }
         }
         return count;
+    }
+}
+
+class UserInput {
+    String userAnswers;
+
+    UserInput() {
+        String tmp = Console.readLine(); // 숫자 입력
+        checkException(tmp);
+        userAnswers = tmp;
+    }
+
+    public void checkException(String userAnswers) throws IllegalArgumentException {
+        if (userAnswers.length() != 3) {
+            throw new IllegalArgumentException();
+        }
+        for (int i = 0; i < 3; i++) {
+            int tmp = (int) userAnswers.charAt(i);
+            if (tmp < (int) '1' || tmp > (int) '9') {
+                throw new IllegalArgumentException();
+            }
+        }
     }
 }
