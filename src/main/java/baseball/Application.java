@@ -38,9 +38,13 @@ class Answer {
     private String answers = new String();
 
     Answer() {
-        for (int i = 0; i < 3; i++) {
-            answers += Integer.toString(Randoms.pickNumberInRange(1, 9));
+        while (answers.length() < 3) {
+            String tmp = Integer.toString(Randoms.pickNumberInRange(1, 9));
+            if (!answers.contains(tmp)) {
+                answers += tmp;
+            }
         }
+        System.out.println(answers);
     }
 
     public boolean getHint(String userAnswers) {
